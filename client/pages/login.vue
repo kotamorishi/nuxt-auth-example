@@ -6,13 +6,13 @@
           <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
             Username
           </label>
-          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username">
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" v-model="user.email" type="text" placeholder="Username">
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
             Password
           </label>
-          <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************">
+          <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" v-model="user.password" type="password" placeholder="******************">
           <p class="text-red-500 text-xs italic">Please choose a password.</p>
         </div>
         <div class="flex items-center justify-between">
@@ -41,7 +41,7 @@
     methods:{
       async userLogin() {
       try {
-        let response = await this.$auth.loginWith('local', { data: this.login })
+        let response = await this.$auth.loginWith('local', { data: this.user })
         console.log(response)
       } catch (err) {
         console.log(err)
