@@ -1,5 +1,9 @@
 
 export default {
+  // move all client files under client
+  srcDir: 'client/',
+  // specify server api
+  serverMiddleware: ["~~/api/"],
   /*
   ** Nuxt rendering mode
   ** See https://nuxtjs.org/api/configuration-mode
@@ -52,6 +56,8 @@ export default {
   ** Nuxt.js modules
   */
   modules: [
+  '@nuxtjs/axios',  
+  '@nuxtjs/auth'
   ],
   /*
   ** Build configuration

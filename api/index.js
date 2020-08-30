@@ -1,10 +1,11 @@
-const app = require('express')()
-module.exports = { path: '/api', handler: app }
+const express = require("express");
+const app = express();
 
-const cors = require('cors')
-app.use(cors())
+app.get("/", function(req, res) {
+  res.send("HelloWorld");
+});
 
-
-app.get('/test', async (req, res) => {
-  res.json("OK")
-})
+module.exports = {
+  path: "/api/",
+  handler: app
+};
