@@ -12,7 +12,7 @@
         </button>
       </div>
       <div v-else>
-        You are not logged in.
+        You are <strong>NOT logged in</strong>.
         Reload this page or redirect in the userLogout function.
       </div>
     </div>

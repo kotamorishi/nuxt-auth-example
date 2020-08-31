@@ -1,14 +1,26 @@
-const express = require("express");
+const express = require("express")
+const bodyParser = require('body-parser')
 const jwt = require('jsonwebtoken')
 const app = express();
 
+const secretKey = "thisKeyUsedForToken";
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
 app.post("/auth/login", function(req, res) {
+
+  if(req.body.email == "test"){
+    return res.sendStatus(403);
+  }
   // always reutn success
   const payload = {
     id : 1,
     email: req.email
   }
-  const token = jwt.sign(payload,'secret')
+  const token = jwt.sign(payload, secretKey)
   return res.json({token})
 });
 
@@ -18,7 +30,7 @@ app.get('/auth/user/',(req,res) => {
   const bearer = bearToken.split(' ')
   const token = bearer[1]
 
-  jwt.verify(token,'secret',(err,user)=>{
+  jwt.verify(token, secretKey,(err,user)=>{
     if(err){
       return res.sendStatus(403)
     }else{
