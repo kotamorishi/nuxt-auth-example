@@ -11,7 +11,9 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 app.post("/auth/login", function(req, res) {
-
+  //
+  // DB access or call other API to validate credentials.
+  //
   if(req.body.email == "test"){
     return res.sendStatus(403);
   }
