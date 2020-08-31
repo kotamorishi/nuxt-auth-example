@@ -2,6 +2,11 @@
 
 Please note this is my first Nuxt.js app. something could be wrong or not the right way.
 
+# user/pass
+
+Success : Any username and password combination even blank works.
+Fail : Username "test"
+
 ## Build Setup
 
 ```bash
