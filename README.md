@@ -1,5 +1,7 @@
 # nuxt-auth-example
 
+Please note this is my first Nuxt.js app. something could be wrong or not the right way.
+
 ## Build Setup
 
 ```bash
