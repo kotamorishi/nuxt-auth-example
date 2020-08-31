@@ -5,30 +5,30 @@
       <h1 class="title">
         nuxt-auth-example
       </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+      <div v-if="$auth.loggedIn">
+        <p class="text-green-700 py-2">Welcome, You are logged in.</p>
+        <button class="bg-transparent hover:bg-green-500 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded" @click="userLogout">
+          Logout
+        </button>
+      </div>
+      <div v-else>
+        You are not logged in.
+        Reload this page or redirect in the userLogout function.
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+  export default {
+    methods:{
+      userLogout() {
+        this.$auth.logout();
+        // redirect to login page or whatever
+      }
+    }
+  }
+
 </script>
 
 <style>

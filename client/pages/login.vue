@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="w-full max-w-xs">
-      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" @submit="userLogin">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" v-on:submit.prevent="userLogin">
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
             Username
@@ -12,8 +12,9 @@
           <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
             Password
           </label>
-          <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" v-model="user.password" type="password" placeholder="******************">
-          <p class="text-red-500 text-xs italic">Please choose a password.</p>
+          <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" v-model="user.password" type="password" placeholder="******************">
+          <p v-if="error.password" class="text-red-500 text-xs italic">Please choose a password.</p>
+          <p v-if="error.authFailed" class="text-red-500 text-xs italic">Authentication failed.</p>
         </div>
         <div class="flex items-center justify-between">
           <button type="submit" class="bg-gray-300 hover:bg-gray-600 text-black hover:text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
@@ -22,7 +23,7 @@
         </div>
       </form>
       <p class="text-center text-gray-500 text-xs">
-        &copy;2020 Acme Corp. All rights reserved.
+        &copy;2020 Your name. All rights reserved.
       </p>
     </div>
   </div>
@@ -32,6 +33,11 @@
   export default {
     data(){
       return {
+        error:{
+          email : false,
+          password : false,
+          authFailed : false
+        },
         user:{
           email:'',
           password:''
@@ -40,12 +46,17 @@
     },
     methods:{
       async userLogin() {
-      try {
-        let response = await this.$auth.loginWith('local', { data: this.user })
-        console.log(response)
-      } catch (err) {
-        console.log(err)
-      }
+        //this.error.email = true;
+        //this.error.password = true;
+        this.error.authFailed = false;
+
+        try {
+          let response = await this.$auth.loginWith('local', { data: this.user })
+          console.log(response)
+        } catch (err) {
+          this.authFailed = true
+          console.log(err)
+        }
       }
     }
   }
